@@ -5,12 +5,13 @@ const cors = require('cors');
 
 const { notFound, errorHandler } = require('./middlewares');
 
+require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 8000;
 
 app.use(morgan('common'));
 app.use(helmet());
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
 
 app.get('/', (req, res) => {
 	res.json({
