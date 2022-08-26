@@ -19,6 +19,7 @@ const port = process.env.PORT || 8000;
 app.use(morgan('common'));
 app.use(helmet());
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
+app.use(express.json());
 
 app.get('/', (req, res) => {
 	res.json({
