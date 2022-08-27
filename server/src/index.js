@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 	});
 });
 
-app.use('/api/log', logs);
+app.use('/api/logs', logs);
 
 app.use(notFound);
 
