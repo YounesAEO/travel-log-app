@@ -15,11 +15,13 @@ function App() {
 	const [showPopup, setShowPopup] = useState({});
 	const [clickLocation, setClickLocation] = useState(null);
 
+	const getAllEntries = async () => {
+		const entries = await fetchLogEntries();
+		setEntries(entries);
+	};
+
 	useEffect(() => {
-		(async () => {
-			const entries = await fetchLogEntries();
-			setEntries(entries);
-		})();
+		getAllEntries();
 	}, []);
 
 	const addNewEntry = (event) => {
@@ -39,9 +41,8 @@ function App() {
 			{/* list all entries */}
 			{entries.map((entry, index) => {
 				return (
-					<>
+					<React.Fragment key={index}>
 						<Marker
-							key={`marker${index}`}
 							longitude={entry?.longitude}
 							latitude={entry?.latitude}
 							anchor="bottom">
@@ -56,7 +57,6 @@ function App() {
 						</Marker>
 						{showPopup[entry?._id?.toString()] ? (
 							<Popup
-								key={`popup${index}`}
 								longitude={entry?.longitude}
 								latitude={entry?.latitude}
 								closeButton={true}
@@ -74,7 +74,7 @@ function App() {
 								</div>
 							</Popup>
 						) : null}
-					</>
+					</React.Fragment>
 				);
 			})}
 
@@ -95,7 +95,13 @@ function App() {
 						closeOnClick={false}
 						onClose={() => setClickLocation(null)}>
 						<div className="popup">
-							<LogEntryForm />
+							<LogEntryForm
+								location={clickLocation}
+								onClose={() => {
+									getAllEntries();
+									setClickLocation(null);
+								}}
+							/>
 						</div>
 					</Popup>
 				</>
