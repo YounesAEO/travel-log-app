@@ -71,6 +71,12 @@ function App() {
 											entry?.visitDate
 										).toLocaleDateString()}
 									</small>
+									{entry?.image && (
+										<img
+											src={entry?.image}
+											alt={entry?.title}
+										/>
+									)}
 								</div>
 							</Popup>
 						) : null}

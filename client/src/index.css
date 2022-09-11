@@ -13,6 +13,14 @@ body {
 	padding: 1rem;
 }
 
+.popup img {
+	max-width: 100%;
+	height: 200px;
+	text-align: center;
+	margin: 0 auto;
+	display: block;
+}
+
 .entry-form label,
 .entry-form input,
 .entry-form textarea,
