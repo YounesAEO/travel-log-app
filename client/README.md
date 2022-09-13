@@ -1,1 +1,0 @@
-# Travel log app client
